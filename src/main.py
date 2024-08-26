@@ -1,4 +1,5 @@
 from frota import *
+import pickle
 
 def operar_carro(carro: Carro):
     print('1- Ligar motor')
@@ -20,6 +21,14 @@ def operar_carro(carro: Carro):
 
 if __name__ == "__main__":
     print('Cadastre um carro')
+
+    try:
+        with open("carros.pkl", 'rb') as arquivo:
+            carros = pickle.load(arquivo)
+            print(carros)
+    except Exception as e:
+        print(e)
+
     nm_modelo = input('Digite o modelo: ')
     nm_marca = input('Digite a marca: ')
     nm_cor = input('Digite a cor: ')
@@ -33,10 +42,20 @@ if __name__ == "__main__":
     consumo = float(input("Digite o consumo medio"))
     carro2 = Carro(nm_modelo2, nm_marca2, nm_cor2, 0, False, consumo, 100)
 
+    carros = {}
+    carros[id(carro1)] = carro1
+    carros[id(carro2)] = carro2
+
+    try:
+        with open("carros.pkl", 'wb') as arquivo:
+            pickle.dump(carros, arquivo)
+    except Exception as e:
+        print(e)
+
     '''
     Controlando o carro até ele atingir 10000 Km
     '''
-    while (carro1.odometro < 600 and carro2.odometro < 600) and (carro1.tanque > 0 or carro2.tanque > 0):
+    while (carro1.get_odometro() < 600 and carro2.get_odometro() < 600) and (carro1.get_tanque() > 0 or carro2.get_tanque() > 0):
         try:
             op = 0
             while op not in (1, 2):
