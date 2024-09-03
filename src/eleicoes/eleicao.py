@@ -53,6 +53,10 @@ class Urna:
             pickle.dump(self.__votos, arquivo)
         print(self)
 
+    def encerrar_urna(self):
+        with open(f"final_{self.__nome_arquivo}", 'wb') as arquivo:
+            pickle.dump(self.__votos, arquivo)
+        print("Urna finalizada e arquivo gerado!")
     def __str__(self):
         string = ""
         for candidato in self.__candidatos:

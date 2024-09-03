@@ -13,10 +13,11 @@ def menu():
     print("4-Listar Candidatos")
     print("5-Iniciar Urna")
     print("6-Testar Urna")
-    print("7-Sair")
-    op = int(input("Digite a opcao [1 a 7]? "))
+    print("7-Encerrar Urna")
+    print("8-Sair")
+    op = int(input("Digite a opcao [1 a 8]? "))
     while op not in range(1, 8):
-        op = int(input("Digite a opcao [1 a 7]? "))
+        op = int(input("Digite a opcao [1 a 8]? "))
     return op
 
 def inserir_eleitor(eleitores):
@@ -122,6 +123,9 @@ if __name__ == "__main__":
             elif opcao == 6:
                 gerenciar_urna.votar(urna)
             elif opcao == 7:
+                urna.encerrar_urna()
+                break
+            elif opcao == 8:
                 print("Saindo!")
                 break
         except Exception as e:
